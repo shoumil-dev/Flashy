@@ -6,10 +6,13 @@ const nextConfig: NextConfig = {
       {
         source: "/",
         destination: "/quiz",
-        permanent: true, // use false if you want it temporary during testing
+        permanent: true,
       },
     ];
   },
 };
 
 export default nextConfig;
+
+// 👇 Add this line to ensure CommonJS compatibility
+module.exports = nextConfig;
