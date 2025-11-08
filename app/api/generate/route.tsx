@@ -6,13 +6,13 @@ export async function POST(req: Request) {
 
   const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-  const prompt = `Generate ${count} multiple choice questions about ${topic} in JSON format.
+  const prompt = `Generate ${count} multiple choice/select questions about ${topic} in JSON format.
 Each question object must have:
 {
   "question_number": number,
   "question": string,
   "options": [string],
-  "correct_answer": string,
+  "correct_answer": [string],
   "explanation": string
 }`;
 

@@ -11,12 +11,12 @@ export default function Page() {
 
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
 
-  // ✅ Safe load from localStorage (only in browser)
+  // ✅ Safe load from localStorage (client only)
   useEffect(() => {
     if (typeof window === "undefined") return;
     const saved = localStorage.getItem("quizData");
@@ -33,17 +33,33 @@ export default function Page() {
     return <p className="text-center mt-10">No quiz loaded.</p>;
 
   const question = questions[currentIndex];
+  const correctAnswers = Array.isArray(question.correct_answer)
+    ? question.correct_answer
+    : [question.correct_answer]; // fallback
 
-  const handleSelect = (option: string) => {
+  const toggleSelect = (option: string) => {
     if (submitted) return;
-    setSelected(option);
+    setSelected((prev) =>
+      prev.includes(option)
+        ? prev.filter((o) => o !== option)
+        : [...prev, option]
+    );
   };
 
   const handleSubmit = () => {
-    if (!selected) return;
+    if (selected.length === 0) return;
+
     setSubmitted(true);
     setShowExplanation(true);
-    if (selected === question.correct_answer) {
+
+    // ✅ Check if selected answers match correct answers
+    const selectedSorted = [...selected].sort();
+    const correctSorted = [...correctAnswers].sort();
+    const isCorrect =
+      selectedSorted.length === correctSorted.length &&
+      selectedSorted.every((v, i) => v === correctSorted[i]);
+
+    if (isCorrect) {
       setScore((s) => s + 1);
     }
   };
@@ -51,7 +67,7 @@ export default function Page() {
   const nextQuestion = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((i) => i + 1);
-      setSelected(null);
+      setSelected([]);
       setSubmitted(false);
       setShowExplanation(false);
     } else {
@@ -73,7 +89,7 @@ export default function Page() {
   const prevQuestion = () => {
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
-      setSelected(null);
+      setSelected([]);
       setSubmitted(false);
       setShowExplanation(false);
     }
@@ -119,8 +135,8 @@ export default function Page() {
           className="space-y-3"
         >
           {question.options.map((opt: string) => {
-            const isCorrect = opt === question.correct_answer;
-            const isSelected = selected === opt;
+            const isCorrect = correctAnswers.includes(opt);
+            const isSelected = selected.includes(opt);
 
             let style =
               "w-full justify-start text-base whitespace-normal break-words text-left h-auto min-h-[3rem] py-3 leading-snug";
@@ -131,7 +147,7 @@ export default function Page() {
                 ? " bg-green-600 text-white"
                 : " bg-red-500 text-white";
             }
-            if (submitted && isCorrect && !isSelected)
+            if (submitted && !isSelected && isCorrect)
               style += " bg-green-500/60 text-white";
 
             return (
@@ -139,7 +155,7 @@ export default function Page() {
                 key={opt}
                 variant="outline"
                 className={style}
-                onClick={() => handleSelect(opt)}
+                onClick={() => toggleSelect(opt)}
               >
                 {opt}
               </Button>
@@ -157,7 +173,7 @@ export default function Page() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
               className={`p-4 rounded-lg font-medium text-white text-center ${
-                selected === question.correct_answer
+                selected.sort().toString() === correctAnswers.sort().toString()
                   ? "bg-green-600"
                   : "bg-red-500"
               }`}
@@ -181,7 +197,7 @@ export default function Page() {
           {!submitted && (
             <Button
               onClick={handleSubmit}
-              disabled={!selected}
+              disabled={selected.length === 0}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6"
             >
               Submit
