@@ -1,49 +1,46 @@
 "use client";
+export const dynamic = "force-dynamic";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-
 import { Button } from "@/components/ui/button";
 
 export default function Page() {
-  const [quizData, setQuizData] = useState<any>(null);
   const router = useRouter();
 
+  const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
 
+  // ✅ Safe load from localStorage (only in browser)
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const saved = localStorage.getItem("quizData");
-    if (saved) setQuizData(JSON.parse(saved));
+    if (saved) {
+      try {
+        setQuestions(JSON.parse(saved));
+      } catch {
+        console.error("Invalid quizData in localStorage");
+      }
+    }
   }, []);
 
-  const stored = localStorage.getItem("quizData");
-  const questions = stored ? JSON.parse(stored) : [];
-
-  if (questions.length === 0) return <p>No quiz loaded.</p>;
+  if (questions.length === 0)
+    return <p className="text-center mt-10">No quiz loaded.</p>;
 
   const question = questions[currentIndex];
 
-  const handleAnswer = (option: string) => {
-    if (showExplanation) return; // prevent re-answering
-    setSelected(option);
-    setShowExplanation(true);
-    if (option === question.correct_answer) {
-      setScore((s) => s + 1);
-    }
-  };
-
   const handleSelect = (option: string) => {
-    if (submitted) return; // prevent changing after submit
+    if (submitted) return;
     setSelected(option);
   };
 
   const handleSubmit = () => {
-    if (!selected) return; // ignore if no option selected
+    if (!selected) return;
     setSubmitted(true);
     setShowExplanation(true);
     if (selected === question.correct_answer) {
@@ -52,37 +49,40 @@ export default function Page() {
   };
 
   const nextQuestion = () => {
-    setSelected(null);
-    setSubmitted(false);
-    setShowExplanation(false);
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((i) => i + 1);
+      setSelected(null);
+      setSubmitted(false);
+      setShowExplanation(false);
     } else {
-      // ✅ Quiz completed — save result and go to /result
-      localStorage.setItem(
-        "quizResult",
-        JSON.stringify({
-          score,
-          total: questions.length,
-          percent: Math.round((score / questions.length) * 100),
-        })
-      );
+      // ✅ Save result and navigate
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          "quizResult",
+          JSON.stringify({
+            score,
+            total: questions.length,
+            percent: Math.round((score / questions.length) * 100),
+          })
+        );
+      }
       router.push("/test/result");
     }
   };
 
   const prevQuestion = () => {
-    setSelected(null);
-    setSubmitted(false);
-    setShowExplanation(false);
     if (currentIndex > 0) {
       setCurrentIndex((i) => i - 1);
+      setSelected(null);
+      setSubmitted(false);
+      setShowExplanation(false);
     }
   };
 
   return (
     <div className="flex justify-center mt-8">
       <div className="max-w-2xl w-full p-8 space-y-8 rounded-2xl bg-card shadow-md border border-border">
+        {/* Back Button */}
         <Button
           variant="outline"
           onClick={() => router.push("/quiz")}
@@ -90,7 +90,8 @@ export default function Page() {
         >
           ← Back to Home
         </Button>
-        {/* Question Number */}
+
+        {/* Question Header */}
         <div className="text-center">
           <h2 className="text-2xl font-semibold tracking-tight">
             Question {question.question_number} / {questions.length}
@@ -127,9 +128,11 @@ export default function Page() {
             if (isSelected && !submitted) style += " ring-2 ring-primary";
             if (submitted && isSelected) {
               style += isCorrect
-                ? " bg-blue-500 text-white"
+                ? " bg-green-600 text-white"
                 : " bg-red-500 text-white";
             }
+            if (submitted && isCorrect && !isSelected)
+              style += " bg-green-500/60 text-white";
 
             return (
               <Button
@@ -155,7 +158,7 @@ export default function Page() {
               transition={{ duration: 0.25 }}
               className={`p-4 rounded-lg font-medium text-white text-center ${
                 selected === question.correct_answer
-                  ? "bg-blue-500"
+                  ? "bg-green-600"
                   : "bg-red-500"
               }`}
             >
@@ -175,12 +178,11 @@ export default function Page() {
             ← Previous
           </Button>
 
-          {/* Submit button */}
           {!submitted && (
             <Button
               onClick={handleSubmit}
               disabled={!selected}
-              className="bg-green-600 hover:bg-green-700 text-white px-6"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6"
             >
               Submit
             </Button>
