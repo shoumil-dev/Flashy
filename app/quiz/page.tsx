@@ -14,7 +14,7 @@ export default function Page() {
   const [count, setCount] = useState(5);
   const [loading, setLoading] = useState(false);
 
-  const loadingPhrases = ["Thinking...", "Creating...", "Almost done..."];
+  const loadingPhrases = ["Thinking...", "Creating...", "Almost there..."];
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
@@ -29,6 +29,28 @@ export default function Page() {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
+  const router = useRouter();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleClick = () => inputRef.current?.click();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = JSON.parse(event.target?.result as string);
+        localStorage.setItem("quizData", JSON.stringify(data));
+        router.push("/test");
+      } catch {
+        alert("Invalid JSON file");
+      }
+    };
+    reader.readAsText(file);
+  };
+
   const handleGenerate = async () => {
     if (!topic.trim()) return alert("Enter a topic");
     setLoading(true);
@@ -41,19 +63,10 @@ export default function Page() {
       });
 
       const data = await res.json();
-      localStorage.setItem("testData", data.text);
-
       let raw = data.text.trim();
-
-      // remove ```json or ``` at start and end
       raw = raw.replace(/^```json\s*/i, "").replace(/```$/i, "");
-
-      // now parse
       const questions = JSON.parse(raw);
-
-      // store
       localStorage.setItem("quizData", JSON.stringify(questions));
-
       router.push("/test");
     } catch (err) {
       console.error(err);
@@ -63,34 +76,29 @@ export default function Page() {
     }
   };
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const router = useRouter();
-
-  const handleClick = () => {
-    inputRef.current?.click(); // open file picker
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const data = JSON.parse(event.target?.result as string);
-        localStorage.setItem("quizData", JSON.stringify(data));
-
-        // Navigate after successful upload
-        router.push("/test");
-      } catch {
-        alert("Invalid JSON file");
-      }
-    };
-    reader.readAsText(file);
-  };
-
   return (
-    <div className="flex justify-center items-center w-full py-10 px-4">
+    <div className="flex flex-col justify-center items-center w-full py-10 px-4 space-y-8">
+      {/* Animated Heading */}
+      <motion.h1
+        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-7xl font-extrabold tracking-tight text-center bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
+      >
+        QuizDeck!
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="text-muted-foreground text-center max-w-xl"
+      >
+        Generate, upload, and take interactive quizzes instantly — powered by
+        AI.
+      </motion.p>
+
+      {/* Main Card */}
       <motion.div
         whileTap={{ scale: 0.98 }}
         whileHover={{ scale: 1.01 }}
