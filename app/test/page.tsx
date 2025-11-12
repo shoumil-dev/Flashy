@@ -173,8 +173,7 @@ export default function Page() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
               className={`p-4 rounded-lg font-medium text-white text-center ${
-                [selected].sort().toString() ===
-                [correctAnswers].sort().toString()
+                selected.sort().toString() === correctAnswers.sort().toString()
                   ? "bg-green-600"
                   : "bg-red-500"
               }`}
