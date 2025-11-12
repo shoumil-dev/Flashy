@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 export default function Page() {
   const { theme, setTheme } = useTheme();
   const [topic, setTopic] = useState("");
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState("");
   const [loading, setLoading] = useState(false);
 
   const loadingPhrases = ["Thinking...", "Creating...", "Almost there..."];
@@ -117,10 +117,10 @@ export default function Page() {
           <Input
             type="number"
             min={1}
-            max={20}
-            placeholder="Number of questions"
+            max={65}
+            placeholder="Count"
             value={count}
-            onChange={(e) => setCount(Number(e.target.value))}
+            onChange={(e) => setCount(e.target.value)}
             className="w-32"
           />
           <Button
