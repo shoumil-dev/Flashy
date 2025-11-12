@@ -144,11 +144,11 @@ export default function Page() {
             if (isSelected && !submitted) style += " ring-2 ring-primary";
             if (submitted && isSelected) {
               style += isCorrect
-                ? " bg-green-600 text-white"
-                : " bg-red-500 text-white";
+                ? " !bg-green-600 text-white"
+                : " !bg-red-500 text-white";
             }
             if (submitted && !isSelected && isCorrect)
-              style += " bg-green-500/60 text-white";
+              style += " !bg-green-500/40 text-white";
 
             return (
               <Button
@@ -173,7 +173,8 @@ export default function Page() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.25 }}
               className={`p-4 rounded-lg font-medium text-white text-center ${
-                selected.sort().toString() === correctAnswers.sort().toString()
+                [selected].sort().toString() ===
+                [correctAnswers].sort().toString()
                   ? "bg-green-600"
                   : "bg-red-500"
               }`}
