@@ -6,7 +6,8 @@ export async function POST(req: Request) {
 
   const genAI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-  const prompt = `Generate ${count} multiple choice/select questions about ${topic} in JSON format.
+  const prompt = `Generate ${count} multiple choice and multiple select questions about ${topic} in JSON format. 
+  Answers in the correct_answer section should match the options they correspond to exactly.
 Each question object must have:
 {
   "question_number": number,
@@ -17,7 +18,7 @@ Each question object must have:
 }`;
 
   const result = await await genAI.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: "gemini-2.5-flash-lite",
     contents: prompt,
   });
 
