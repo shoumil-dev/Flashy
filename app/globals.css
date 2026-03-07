@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Nunito', var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -41,75 +41,85 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Kids theme colors */
+  --color-kids-blue: #7DD8F0;
+  --color-kids-green: #6DC87A;
+  --color-kids-orange: #FFAA4C;
+  --color-kids-cream: #FFFBE6;
+  --color-kids-dark: #2D2D2D;
+  --color-kids-pink: #FF8FAB;
+  --color-kids-purple: #B49AFF;
+  --color-kids-yellow: #FFD93D;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 1rem;
+  --background: #E8F4FD;
+  --foreground: #2D2D2D;
+  --card: #FFFBE6;
+  --card-foreground: #2D2D2D;
+  --popover: #FFFBE6;
+  --popover-foreground: #2D2D2D;
+  --primary: #FFAA4C;
+  --primary-foreground: #FFFFFF;
+  --secondary: #D4F5DC;
+  --secondary-foreground: #2D2D2D;
+  --muted: #D0EDFA;
+  --muted-foreground: #5B7A8A;
+  --accent: #B7E9F7;
+  --accent-foreground: #2D2D2D;
+  --destructive: #FF6B6B;
+  --border: #B7E9F7;
+  --input: #B7E9F7;
+  --ring: #7DD8F0;
+  --chart-1: #7DD8F0;
+  --chart-2: #6DC87A;
+  --chart-3: #FFAA4C;
+  --chart-4: #FF8FAB;
+  --chart-5: #B49AFF;
+  --sidebar: #D0EDFA;
+  --sidebar-foreground: #2D2D2D;
+  --sidebar-primary: #FFAA4C;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #B7E9F7;
+  --sidebar-accent-foreground: #2D2D2D;
+  --sidebar-border: #B7E9F7;
+  --sidebar-ring: #7DD8F0;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #1A2A3A;
+  --foreground: #EDF6FA;
+  --card: #243447;
+  --card-foreground: #EDF6FA;
+  --popover: #243447;
+  --popover-foreground: #EDF6FA;
+  --primary: #FFAA4C;
+  --primary-foreground: #1A2A3A;
+  --secondary: #2A4A3A;
+  --secondary-foreground: #EDF6FA;
+  --muted: #2A3A4A;
+  --muted-foreground: #8AAABB;
+  --accent: #2A3A4A;
+  --accent-foreground: #EDF6FA;
+  --destructive: #FF6B6B;
+  --border: #3A5060;
+  --input: #3A5060;
+  --ring: #5BB8D0;
+  --chart-1: #7DD8F0;
+  --chart-2: #6DC87A;
+  --chart-3: #FFAA4C;
+  --chart-4: #FF8FAB;
+  --chart-5: #B49AFF;
+  --sidebar: #243447;
+  --sidebar-foreground: #EDF6FA;
+  --sidebar-primary: #FFAA4C;
+  --sidebar-primary-foreground: #1A2A3A;
+  --sidebar-accent: #2A3A4A;
+  --sidebar-accent-foreground: #EDF6FA;
+  --sidebar-border: #3A5060;
+  --sidebar-ring: #5BB8D0;
 }
 
 @layer base {
@@ -118,5 +128,230 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Nunito', sans-serif;
   }
+}
+
+/* ============================================ */
+/* Kids Quiz App — Decorative & Playful Styles  */
+/* ============================================ */
+
+/* Dotted star-pattern background */
+.kids-bg {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle, rgba(125, 216, 240, 0.18) 1px, transparent 1px),
+    radial-gradient(circle, rgba(109, 200, 122, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px, 60px 60px;
+  background-position: 0 0, 30px 30px;
+}
+
+.dark .kids-bg {
+  background-image:
+    radial-gradient(circle, rgba(125, 216, 240, 0.08) 1px, transparent 1px),
+    radial-gradient(circle, rgba(109, 200, 122, 0.05) 1px, transparent 1px);
+}
+
+/* Floating blob shapes */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .blob {
+  opacity: 0.15;
+}
+
+.blob-blue {
+  background: #7DD8F0;
+  width: 300px;
+  height: 300px;
+}
+
+.blob-green {
+  background: #6DC87A;
+  width: 220px;
+  height: 220px;
+}
+
+.blob-orange {
+  background: #FFAA4C;
+  width: 180px;
+  height: 180px;
+}
+
+.blob-pink {
+  background: #FF8FAB;
+  width: 200px;
+  height: 200px;
+}
+
+/* Sticker-style card */
+.sticker-card {
+  background: var(--card);
+  border: 3px solid #B7E9F7;
+  border-radius: 1.5rem;
+  box-shadow:
+    0 4px 24px rgba(125, 216, 240, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+.dark .sticker-card {
+  border-color: #3A5060;
+  box-shadow:
+    0 4px 24px rgba(125, 216, 240, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Bouncy button hover */
+.btn-bouncy {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.btn-bouncy:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(255, 170, 76, 0.3);
+}
+
+.btn-bouncy:active {
+  transform: scale(0.97);
+}
+
+/* Wiggle animation for correct/wrong feedback */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  15% { transform: rotate(-4deg); }
+  30% { transform: rotate(4deg); }
+  45% { transform: rotate(-3deg); }
+  60% { transform: rotate(3deg); }
+  75% { transform: rotate(-1deg); }
+  90% { transform: rotate(1deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 0.6s ease-in-out;
+}
+
+/* Flash green for correct */
+@keyframes flashGreen {
+  0% { background-color: transparent; }
+  30% { background-color: rgba(109, 200, 122, 0.3); }
+  100% { background-color: transparent; }
+}
+
+.animate-flash-green {
+  animation: flashGreen 0.8s ease;
+}
+
+/* Flash red for wrong */
+@keyframes flashRed {
+  0% { background-color: transparent; }
+  30% { background-color: rgba(255, 107, 107, 0.3); }
+  100% { background-color: transparent; }
+}
+
+.animate-flash-red {
+  animation: flashRed 0.8s ease;
+}
+
+/* Sparkle float animation */
+@keyframes sparkleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+  50% { transform: translateY(-15px) rotate(10deg); opacity: 1; }
+}
+
+.animate-sparkle {
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+/* Gentle float for decorations */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat2 {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+
+.animate-float-2 {
+  animation: gentleFloat2 5s ease-in-out infinite;
+}
+
+@keyframes gentleFloat3 {
+  0%, 100% { transform: translateY(0px) rotate(2deg); }
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+.animate-float-3 {
+  animation: gentleFloat3 3.5s ease-in-out infinite;
+}
+
+/* Star spin */
+@keyframes starSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.animate-star-spin {
+  animation: starSpin 6s ease-in-out infinite;
+}
+
+/* Kids-themed pill input */
+.kids-input {
+  border-radius: 9999px !important;
+  border: 2px solid #B7E9F7 !important;
+  background: var(--card) !important;
+  padding: 0.65rem 1.25rem !important;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kids-input:focus {
+  border-color: #7DD8F0 !important;
+  box-shadow: 0 0 0 3px rgba(125, 216, 240, 0.25) !important;
+}
+
+.dark .kids-input {
+  border-color: #3A5060 !important;
+  background: #243447 !important;
+}
+
+.dark .kids-input:focus {
+  border-color: #5BB8D0 !important;
+  box-shadow: 0 0 0 3px rgba(91, 184, 208, 0.2) !important;
+}
+
+/* Progress bar */
+.kids-progress-track {
+  background: #D0EDFA;
+  border-radius: 9999px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.dark .kids-progress-track {
+  background: #2A3A4A;
+}
+
+.kids-progress-fill {
+  background: linear-gradient(90deg, #6DC87A, #7DD8F0);
+  border-radius: 9999px;
+  height: 100%;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
