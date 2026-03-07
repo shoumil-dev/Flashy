@@ -251,7 +251,7 @@ export default function Page() {
         className="text-center z-10"
       >
         <h1
-          className="text-6xl sm:text-7xl font-black tracking-tight"
+          className="text-5xl sm:text-7xl font-black tracking-tight"
           style={{
             background: "linear-gradient(135deg, #7DD8F0 0%, #6DC87A 40%, #FFAA4C 80%, #FF8FAB 100%)",
             WebkitBackgroundClip: "text",
@@ -267,7 +267,7 @@ export default function Page() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="text-muted-foreground text-center max-w-xl text-lg font-semibold z-10"
+        className="text-muted-foreground text-center max-w-xl text-base sm:text-lg font-semibold z-10"
       >
         Generate, upload, and take interactive quizzes instantly — powered by AI <IconSparkles className="inline-block w-5 h-5 align-middle ml-1" />
       </motion.p>
@@ -295,14 +295,14 @@ export default function Page() {
             placeholder="# Qs"
             value={count}
             onChange={(e) => setCount(e.target.value)}
-            className="w-32 kids-input"
+            className="w-full sm:w-32 kids-input"
           />
           <Button
             onClick={handleGenerate}
             disabled={loading}
             variant="default"
             size="lg"
-            className="btn-bouncy px-8 font-bold text-base rounded-full shadow-lg"
+            className="w-full sm:w-auto btn-bouncy px-8 font-bold text-base rounded-full shadow-lg"
           >
             {loading ? (
               <>
@@ -410,7 +410,7 @@ export default function Page() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10"
+                    className="shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10"
                     onClick={(e) => {
                       e.stopPropagation();
                       deleteQuiz(quiz.id);

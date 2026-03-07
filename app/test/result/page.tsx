@@ -126,12 +126,12 @@ export default function ResultPage() {
             </div>
 
             {/* Action buttons */}
-            <div className="flex justify-center gap-4 pt-4 flex-wrap">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4 w-full">
               <Button
                 variant="outline"
                 size="lg"
                 onClick={() => router.push("/quiz")}
-                className="btn-bouncy rounded-full px-8 font-bold border-2"
+                className="w-full sm:w-auto btn-bouncy rounded-full px-8 font-bold border-2"
               >
                 Home
               </Button>
@@ -142,7 +142,7 @@ export default function ResultPage() {
                   localStorage.removeItem("quizResult");
                   router.push("/test");
                 }}
-                className="btn-bouncy rounded-full px-8 font-bold text-base shadow-lg bg-[#7DD8F0] hover:bg-[#6AC8E0] text-white"
+                className="w-full sm:w-auto btn-bouncy rounded-full px-8 font-bold text-base shadow-lg bg-[#7DD8F0] hover:bg-[#6AC8E0] text-white"
               >
                 Retake
               </Button>

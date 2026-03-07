@@ -286,7 +286,7 @@ export default function Page() {
                 variant="outline"
                 onClick={prevQuestion}
                 disabled={currentIndex === 0}
-                className="btn-bouncy rounded-full px-6 font-bold border-2"
+                className="btn-bouncy rounded-full px-4 sm:px-6 font-bold border-2"
               >
                 Previous
               </Button>
@@ -295,7 +295,7 @@ export default function Page() {
                 <Button
                   onClick={handleSubmit}
                   disabled={selected.length === 0}
-                  className="btn-bouncy rounded-full px-8 font-bold text-base shadow-lg bg-[#7DD8F0] hover:bg-[#6AC8E0] text-white"
+                  className="btn-bouncy rounded-full px-5 sm:px-8 font-bold text-sm sm:text-base shadow-lg bg-[#7DD8F0] hover:bg-[#6AC8E0] text-white"
                 >
                   Submit
                 </Button>
@@ -303,7 +303,7 @@ export default function Page() {
 
               <Button
                 onClick={nextQuestion}
-                className={`btn-bouncy rounded-full px-6 font-bold ${
+                className={`btn-bouncy rounded-full px-4 sm:px-6 font-bold ${
                   currentIndex === questions.length - 1
                     ? "bg-[#FFAA4C] hover:bg-[#E8993F] text-white shadow-lg"
                     : ""
