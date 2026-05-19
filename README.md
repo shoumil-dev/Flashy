@@ -36,4 +36,4 @@
 
 ---
 
-© 2025 Shoumil Guha
+© 2026 Shoumil Guha
