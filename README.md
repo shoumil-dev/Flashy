@@ -31,7 +31,7 @@
 - **TypeScript**
 - **Tailwind CSS** + **shadcn/ui**
 - **Framer Motion** for animations
-- **Anthropic API** for AI question generation
+- **Gemini API** for AI question generation
 - **Vercel** for deployment
 
 ---
